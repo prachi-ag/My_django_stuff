@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<body>
+<nav class = "navbar navbar-default navbar-static-top">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            <li><a class="navbar-brand" href="{% url 'index' %}">DJANGO</a></li>
+            <li><a class="navbar-link" href="{% url 'admin:index' %}">ADMIN</a></li>
+            <li><a class="navbar-brand" href="{% url 'kreiva:register' %}">REGISTER</a></li>
+            {% if user.is_authenticated %}
+                <li><a class="navbar-brand" href="{% url 'logout'%}">LOGOUT</a></li>
+            {% else %}
+                <li><a class="navbar-brand" href="{% url 'kreiva:user_login' %}">LOGIN</a></li>
+            {% endif %}
+
+
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    {% block body_block %}
+    {% endblock %}
+</div>
+</body>
+</html>
