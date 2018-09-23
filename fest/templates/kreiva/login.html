@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% extends "kreiva/base.html" %}
+   {% block body_block %}
+      <div class="jumbotron">
+          <h1>Please LoginIn:</h1>
+          <form action="{% url 'kreiva:user_login' %}" method="post">
+              {% csrf_token %}
+              <label for="username">Username:</label>
+              <input type="text" name="username" placeholder="Enter username">
+              <label for="password">Password</label>
+              <input type="password" name="password">
+              <input type="submit" value="Login" name="">
+          </form>
+      </div>
+   {% endblock %}
