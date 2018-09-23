@@ -1,10 +1,17 @@
-from django.shortcuts import render
+
 from . import forms
-#
+from . import models
+from . import serializers
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+
+
+from django.shortcuts import render
+from rest_framework import permissions
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 # Create your views here.
 def index(request):
@@ -58,3 +65,33 @@ def user_logout(request):
 def special(request):
     return HttpResponse("You are logged In, Nice!")
 
+
+
+
+class UserPartiInfo(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self, pk):
+        try:
+            return models.UserPartiInfo.objects.get(pk=pk)
+        except:
+            return None
+
+    def get(self, request, pk=None):
+        if pk:
+            city = self.get_object(pk)
+            serializer = serializers.UserPartiInfoSerializer(city)
+            return Response(serializer.data)
+        # else:
+        #     state = models.State.objects.order_by("name")
+        #     city = models.City.objects.order_by("state", "name")
+        # return render(request, 'places/city.html', {'citys': city, 'states': state})
+
+    def post(self, request):
+            serializer = serializers.UserPartiInfoSerializer(data=request.data)
+            response = {'status': True}
+            if serializer.is_valid():
+                serializer.save()
+            else:
+                response.update({'status': False, 'msg': str(serializer.errors)})
+            return Response(response)
