@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<h2>DashBoard</h2>
+<form class="choose_form">
+    {% csrf_token %}
+    <div>
+        <input id="user"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event" type="hidden" name = "event" type="text" value="ENCORE" required>
+    </div>
+    <input id='update'  type="submit" name = "RYTHEM" class="btn btn-primary btn-block update" >
+</form>
+<!--<table>-->
+              <!--<thead>-->
+              <!--<tr>-->
+                <!--<th>S.No</th>-->
+                <!--<th>User</th>-->
+                <!--<th>Event</th>-->
+              <!--</tr>-->
+              <!--</thead>-->
+              <!--<tfoot>-->
+              <!--{% for user_infos in user_info %}-->
+                <!--<tr>-->
+                  <!--<th>{{ forloop.counter }}</th>-->
+                  <!--<th>{{ user_infos.user.name}}</th>-->
+                  <!--<th>{{ user_infos.event }}</th>-->
+                <!--</tr>-->
+              <!--{% endfor %}-->
+              <!--</tfoot>-->
+
+              <!--</tbody>-->
+            </table>
+<script>
+    $(document).ready(function () {
+        $("#update").click(function (e) {
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+</script>
+</body>
+</html>
