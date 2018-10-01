@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<body>
+<!--navabr begins-->
+<nav class = "navbar navbar-default navbar-static-top">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            <li><a class="navbar-brand" href="{% url 'index' %}">DJANGO</a></li>
+
+            {% if user.is_authenticated %}
+                <li><a class="navbar-brand" href="{% url 'logout'%}">LOGOUT</a></li>
+                <li><a class="navbar-brand" href="{% url 'kreiva:dashboard' %}">MY DASHBOARD</a></li>
+            {% else %}
+                <li><a class="navbar-brand" href="{% url 'kreiva:user_login' %}">LOGIN</a></li>
+            {% endif %}
+
+
+        </ul>
+    </div>
+</nav>
+
+<!--navabar ends-->
+<h2>Events</h2>
+<!-- Music Club Events -->
+<form class="choose_form1">
+    {% csrf_token %}
+    <div>
+        <input id="user1"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event1" type="hidden" name = "event" type="text" value="Cresendo_Rythcore" required>
+    </div>
+    <!--{% if 'Cresendo_Rythcore' in taken_part%}-->
+    <input id='update1'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Cresendo">
+    <!--{% else %}-->
+    <!--<input class='update1'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Cresendo">-->
+    <!--{% endif %}-->
+</form>
+<form class="choose_form2">
+    <!--event2-->
+    {% csrf_token %}
+    <div>
+        <input id="user2"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event2" type="hidden" name = "event" type="text" value="Ensemble_Rythcore" required>
+    </div>
+    <input id='update2'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Ensemble" >
+</form>
+<form class="choose_form3">
+
+    {% csrf_token %}
+    <div>
+        <input id="user3"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event3" type="hidden" name = "event" type="text" value="Reverb_Rythcore" required>
+    </div>
+    <input id='update3'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Reverb" >
+</form>
+
+<!-- Drama Club Events -->
+<form class="choose_form4">
+
+    {% csrf_token %}
+    <div>
+        <input id="user4"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event4" type="hidden" name = "event" type="text" value="Goonj_Prakat" required>
+    </div>
+    <input id='update4'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Goonj" >
+</form>
+<form class="choose_form5">
+
+    {% csrf_token %}
+    <div>
+        <input id="user5"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event5" type="hidden" name = "event" type="text" value="Abhinay_Prakat" required>
+    </div>
+    <input id='update5'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Abhinay" >
+</form>
+<form class="choose_form6">
+
+    {% csrf_token %}
+    <div>
+        <input id="user6"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event6" type="hidden" name = "event" type="text" value="DubsClub_Prakat" required>
+    </div>
+    <input id='update6'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="DubsClub" >
+</form>
+
+<!-- Photography Club Event -->
+<form class="choose_form7">
+    {% csrf_token %}
+    <div>
+        <input id="user7"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event7" type="hidden" name = "event" type="text" value="Nazara_Photography" required>
+    </div>
+    <input id='update7'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Nazara" >
+</form>
+<form class="choose_form8">
+    {% csrf_token %}
+    <div>
+        <input id="user8"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event8" type="hidden" name = "event" type="text" value="Caption-a-pic_Photography" required>
+    </div>
+    <input id='update8'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Caption-a-pic" >
+</form>
+<form class="choose_form9">
+    {% csrf_token %}
+    <div>
+        <input id="user9"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event9" type="hidden" name = "event" type="text" value="Photo-Booth_Photography" required>
+    </div>
+    <input id='update9'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Photo-Booth" >
+</form>
+
+<!-- Design Club Events -->
+<form class="choose_form10">
+    {% csrf_token %}
+    <div>
+        <input id="user10"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event10" type="hidden" name = "event" type="text" value="Surrealism_Vision" required>
+    </div>
+    <input id='update10'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Surrealism" >
+</form>
+<form class="choose_form11">
+    {% csrf_token %}
+    <div>
+        <input id="user11"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event11" type="hidden" name = "event" type="text" value="Minimalism_Vision" required>
+    </div>
+    <input id='update11'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Minimalism
+    " >
+</form>
+
+<!-- Dance Events -->
+
+<form class="choose_form12">
+    {% csrf_token %}
+    <div>
+        <input id="user12"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event12" type="hidden" name = "event" type="text" value="Taalmel_Dance" required>
+    </div>
+    <input id='update12'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Taalmel" >
+</form>
+<form class="choose_form13">
+    {% csrf_token %}
+    <div>
+        <input id="user13"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event13" type="hidden" name = "event" type="text" value="Solo_Dance" required>
+    </div>
+    <input id='update13'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Solo">
+</form>
+
+<!-- Pronites -->
+
+<form class="choose_form14">
+    {% csrf_token %}
+    <div>
+        <input id="user14"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event14" type="hidden" name = "event" type="text" value="Stand-up-Comedy_Pronites" required>
+    </div>
+    <input id='update14'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Stand-up-Comedy" >
+</form>
+<form class="choose_form15">
+    {% csrf_token %}
+    <div>
+        <input id="user15"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event15" type="hidden" name = "event" type="text" value="Live-Bands-Performance_Pronites" required>
+    </div>
+    <input id='update15'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Live Band Performance">
+</form>
+
+<!-- Art Club Events -->
+
+<form class="choose_form16">
+    {% csrf_token %}
+    <div>
+        <input id="user16"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event16" type="hidden" name = "event" type="text" value="Blind-Fold_Shades" required>
+    </div>
+    <input id='update16'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Blind Fold">
+</form>
+<form class="choose_form17">
+
+    {% csrf_token %}
+    <div>
+        <input id="user17"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event17" type="hidden" name = "event" type="text" value="Mystery-Box_Shades" required>
+    </div>
+    <input id='update17'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Mystery-Box" >
+</form>
+<form class="choose_form18">
+
+    {% csrf_token %}
+    <div>
+        <input id="user18"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event18" type="hidden" name = "event" type="text" value="Contrasto_Shades" required>
+    </div>
+    <input id='update18'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Contrasto" >
+</form>
+<form class="choose_form19">
+    {% csrf_token %}
+    <div>
+        <input id="user19"  type="hidden" name = "user" type="text" value="{{ user.id }}" required>
+        <input id="event19" type="hidden" name = "event" type="text" value="Depict-a-Story-Picture_Shades" required>
+    </div>
+          <input id='update19'  type="submit" name = "RYTHCORE" class="btn btn-primary btn-block update" value="Depict a Story">
+</form>
+
+<!-- Events Ends -->
+
+
+<script>
+    $(document).ready(function () {
+
+    {% if 'Cresendo_Rythcore' in taken_part%}
+        $("#update1").attr("disabled", true);
+    {% endif %}
+
+        $("#update1").click(function (e) {
+          $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form1').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+    $(document).ready(function () {
+        {% if 'Ensemble_Rythcore' in taken_part%}
+        $("#update2").attr("disabled", true);
+    {% endif %}
+
+
+        $("#update2").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form2').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+    $(document).ready(function () {
+    {% if 'Reverb_Rythcore' in taken_part%}
+        $("#update3").attr("disabled", true);
+    {% endif %}
+
+
+        $("#update3").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form3').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+    $(document).ready(function () {
+
+    {% if 'Goonj_Prakat' in taken_part%}
+        $("#update4").attr("disabled", true);
+    {% endif %}
+
+        $("#update4").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form4').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+    $(document).ready(function () {
+    {% if 'Abhinay_Prakat' in taken_part%}
+        $("#update5").attr("disabled", true);
+    {% endif %}
+
+
+        $("#update5").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form5').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+    $(document).ready(function () {
+
+    {% if 'DubsClub_Prakat' in taken_part%}
+        $("#update6").attr("disabled", true);
+    {% endif %}
+
+        $("#update6").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form6').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+
+    $(document).ready(function () {
+    {% if 'Nazara_Photography' in taken_part%}
+        $("#update7").attr("disabled", true);
+    {% endif %}
+
+        $("#update7").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form7').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+    $(document).ready(function () {
+    {% if 'Caption-a-pic_Photography' in taken_part%}
+        $("#update8").attr("disabled", true);
+    {% endif %}
+
+        $("#update8").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form8').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+    $(document).ready(function () {
+    {% if 'Photo-Booth_Photography' in taken_part%}
+        $("#update9").attr("disabled", true);
+    {% endif %}
+
+        $("#update9").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form9').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+    $(document).ready(function () {
+    {% if 'Surrealism_Vision' in taken_part%}
+        $("#update10").attr("disabled", true);
+    {% endif %}
+
+        $("#update10").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form10').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+    $(document).ready(function () {
+    {% if 'Minimalism_Vision' in taken_part%}
+        $("#update11").attr("disabled", true);
+    {% endif %}
+
+        $("#update11").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form11').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+    $(document).ready(function () {
+    {% if 'Taalmel_Dance' in taken_part%}
+        $("#update12").attr("disabled", true);
+    {% endif %}
+
+        $("#update12").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form12').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+
+    $(document).ready(function () {
+    {% if 'Solo_Dance' in taken_part%}
+        $("#update13").attr("disabled", true);
+    {% endif %}
+
+        $("#update13").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form13').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+    $(document).ready(function () {
+    {% if 'Stand-up-Comedy_Pronites' in taken_part%}
+        $("#update14").attr("disabled", true);
+    {% endif %}
+
+        $("#update14").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form14').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+    $(document).ready(function () {
+    {% if 'Live-Bands-Performance_Pronites' in taken_part%}
+        $("#update15").attr("disabled", true);
+    {% endif %}
+
+        $("#update15").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form15').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+    $(document).ready(function () {
+    {% if 'Blind-Fold_Shades' in taken_part%}
+        $("#update16").attr("disabled", true);
+    {% endif %}
+
+        $("#update16").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form16').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+    $(document).ready(function () {
+    {% if 'Mystery-Box_Shades' in taken_part%}
+        $("#update17").attr("disabled", true);
+    {% endif %}
+
+        $("#update17").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form17').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+    $(document).ready(function () {
+    {% if 'Contrasto_Shades' in taken_part%}
+        $("#update18").attr("disabled", true);
+    {% endif %}
+        $("#update18").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form18').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+    $(document).ready(function () {
+    {% if 'Depict-a-Story-Picture_Shades' in taken_part%}
+        $("#update19").attr("disabled", true);
+    {% endif %}
+        $("#update19").click(function (e) {
+        $(this).attr('disabled',true)
+            e.preventDefault();
+            var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            console.log("CSRF TOKEN", crf_token);
+            $.ajax({
+                url: '/kreiva/userinfo/',
+                type: 'POST',
+                dataType: "json",
+                headers: {"X-CSRFToken": crf_token},
+                data: $('.choose_form19').serialize(),
+                success: function (reply) {
+                    if (reply.status) {
+                        alert("successfully");
+                    } else {
+                        alert(reply.msg);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.status + ': ' + xhr.responseText);
+                }
+            });
+        });
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

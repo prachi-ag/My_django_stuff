@@ -1,6 +1,8 @@
 from . import forms
 from . import models
 from . import serializers
+from django.views.generic import TemplateView, ListView, DetailView
+
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -10,6 +12,7 @@ from django.shortcuts import render
 from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from .models import UserPartiInfo
 
 # Create your views here.
 def index(request):
@@ -41,6 +44,13 @@ def register(request):
     return render(request, "kreiva/registration.html", {'registered': registered, 'user_form': user_form,
                                                         'profile_form': profile_form})
 
+def user_events_part(user):
+    events = UserPartiInfo.objects.filter(user=user)
+    taken_part = []
+    for usr in events:
+        taken_part.append(usr.event)
+    return  taken_part
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -51,7 +61,10 @@ def user_login(request):
             if user.is_active:
                 login(request, user)
                 context = {'user': user}
-                return render(request, 'kreiva/dashboard.html', context)
+                print("userr ", user)
+                taken_part = user_events_part(user)
+
+                return render(request, 'kreiva/events.html', {"user":user, "taken_part":taken_part})
             else:
                 return HttpResponse("ACCOUNT NOT ACTIVE")
         else:
@@ -71,7 +84,7 @@ def special(request):
 
 
 
-class UserPartiInfo(APIView):
+class UserPartyInfo(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_object(self, pk):
@@ -84,11 +97,13 @@ class UserPartiInfo(APIView):
         if pk:
             user_info = self.get_object(pk)
             serializer = serializers.UserPartiInfoSerializer(user_info)
+            print(user_info.event)
+
             return Response(serializer.data)
         else:
             user_info = models.UserPartiInfo.objects.all()
             serializer = serializers.UserPartiInfoSerializer(user_info, many=True)
-        return render(request, 'kreiva/dashboard.html', {'user_info': user_info})
+        return render(request, 'kreiva/events.html', {'user_info': user_info})
 
     def post(self, request):
         serializer = serializers.UserPartiInfoSerializer(data=request.data)
@@ -98,3 +113,20 @@ class UserPartiInfo(APIView):
         else:
             response.update({'status': False, 'msg': str(serializer.errors)})
         return Response(response)
+
+    def createpost(self, request):
+         if request.method == 'POST':
+             post = models.UserPartiInfo()
+
+             # post.subevent = request.POST.get('participate')
+             post.save()
+
+
+def dashboard(request):
+    user = request.user
+    events = UserPartiInfo.objects.filter(user=user)
+    template = 'kreiva/dashboard.html'
+    return render(request, template, {'events': events})
+
+
+
