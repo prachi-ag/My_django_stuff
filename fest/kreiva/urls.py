@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from . import views
+# this is the first commit
 app_name = 'kreiva'
 urlpatterns = [
     url(r'^register/$', views.register, name='register'),
